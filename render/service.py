@@ -1,7 +1,11 @@
 import json
 import urllib.request
 import datetime
-from .models import ApiData
+import django
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'imonomy_task.settings')
+django.setup()
+from render.models import ApiData
 
 API_KEY = '4e923a83-8b31-4c28-ac3d-f6cb994a60af'
 API_URL = 'http://publishers.imonomy.com/api/reports{query_params}'
@@ -26,4 +30,6 @@ def _get_api_response(api_url):
 
 if __name__ == '__main__':
     response = _get_api_response(_get_api_url())
-
+    for item in response:
+        apidata = ApiData(**item)
+        apidata.save()
