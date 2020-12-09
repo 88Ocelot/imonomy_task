@@ -1,5 +1,6 @@
 # imonomy_task
-
+install dependecies 
+poetry install
 run migrations
 ./manage.py makemigrations && migrate
 
