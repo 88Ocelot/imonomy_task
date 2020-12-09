@@ -3,6 +3,7 @@ import urllib.request
 import datetime
 import django
 import os
+from argparse import ArgumentParser
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'imonomy_task.settings')
 django.setup()
 from render.models import ApiData
@@ -29,7 +30,17 @@ def _get_api_response(api_url):
 
 
 if __name__ == '__main__':
-    response = _get_api_response(_get_api_url())
+    parser = ArgumentParser()
+    parser.add_argument('date_ranges')
+    args = parser.parse_args()
+
+    if args.date_ranges is not None:
+        date_f = args.date_ranges.split('_')[0]
+        date_t = args.date_ranges.split('_')[1]
+        response = _get_api_response(_get_api_url(date_f, date_t))
+    else:
+        response = _get_api_response(_get_api_url())
+
     for item in response:
         apidata = ApiData(**item)
         apidata.save()
