@@ -1,0 +1,20 @@
+<html>
+<table border="1" width="600">
+<tr>
+<td>date</td>
+<td>client name</td>
+<td>provider name</td>
+<td>wons</td>
+<td>revenue</td>
+</tr>
+{% for item in data %}
+<tr>
+<td>{{ item.date }}</td>
+<td>{{ item.client_name }}</td>
+<td>{{ item.provider_name }}</td>
+<td>{{ item.wons }}</td>
+<td>{{ item.revenue }}</td>
+</tr>
+{% endfor %}
+</table>
+</html>
