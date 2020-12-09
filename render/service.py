@@ -31,7 +31,8 @@ def _get_api_response(api_url):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument('date_ranges')
+    parser.add_argument('--date_ranges',
+                        default=None)
     args = parser.parse_args()
 
     if args.date_ranges is not None:
